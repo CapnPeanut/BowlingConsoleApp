@@ -8,126 +8,327 @@ namespace Bowling_Problem
 {
     class Program
     {
+        public static object Lists { get; private set; }
+
         static void Main(string[] args)
         {
-            
-            
 
-        
+            var frameIndex = 0;
 
+            int[] rolls = new int[21];
 
-            // What variables will be needed
-            var score = 0;
-            var frameScore = 0;
-            int[] ScoreCard = new int[23] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-            var scoreCardIndex = 0;
-
-            for (int frames = 1; frames <= 10; frames++)
+            int[][] arrayOfArrays = new int[10][];
+            for (int rowIndex = 0; rowIndex < arrayOfArrays.Length; rowIndex++)
             {
-                Console.WriteLine("You are on frame " + frames);
-                Console.WriteLine("Enter the number of pins knocked down on roll 1 ");
-                int rollOne = Convert.ToInt32(Console.ReadLine());
-
-                if (frames == 10)
+                arrayOfArrays[rowIndex] = new int[3];
+                for (int colIndex = 0; colIndex < arrayOfArrays[rowIndex].Length; colIndex++)
                 {
+                    arrayOfArrays[rowIndex][colIndex] = new int();
+                }
+            }
+
+
+
+            for (int frame = 1; frame < arrayOfArrays.Length + 1; frame++)
+                {
+
+
+
+                    var rollsIndex = 0;
+                    Console.WriteLine("Frame " + frame);
+                    Console.WriteLine("Enter the number of pins knocked down on roll 1 ");
+                    int rollOne = Convert.ToInt32(Console.ReadLine());
+                    var rollCount = 0;
+                    rolls[rollsIndex] = rollOne;
+                    rollsIndex++;
+
+
+                    if (frame == 10)
+                    {
+
+                        arrayOfArrays[frameIndex][rollCount] = rollOne;
+                    if (rollOne == 10)
+                    {
+                        // 2nd roll  frame 10
+                        rollCount += 1;
+                        Console.WriteLine("Enter the number of pins knocked down on roll 2 ");
+                        int rollTwo = Convert.ToInt32(Console.ReadLine());
+
+                        arrayOfArrays[frameIndex][rollCount] = rollTwo;
+                        rolls[rollsIndex] = rollTwo;
+                        rollsIndex++;
+
+                        // Third roll frame 10
+                        rollCount += 1;
+                        Console.WriteLine("Enter the number of pins knocked down on roll 3 ");
+                        int rollThree = Convert.ToInt32(Console.ReadLine());
+
+                        arrayOfArrays[frameIndex][rollCount] = rollThree;
+                        rolls[rollsIndex] = rollThree;
+                        rollsIndex++;
+                    }
+
+                    else
+                    {
+                        rollCount += 1;
+                        Console.WriteLine("Enter the number of pins knocked down on roll 2 ");
+                        int rollTwo = Convert.ToInt32(Console.ReadLine());
+
+                        arrayOfArrays[frameIndex][rollCount] = rollTwo;
+                        rolls[rollsIndex] = rollTwo;
+                        rollsIndex++;
+                        if (rollOne + rollTwo == 10)
+                        {
+                            // Third roll frame 10
+                            rollCount += 1;
+                            Console.WriteLine("Enter the number of pins knocked down on roll 3 ");
+                            int rollThree = Convert.ToInt32(Console.ReadLine());
+
+                            arrayOfArrays[frameIndex][rollCount] = rollThree;
+                            rolls[rollsIndex] = rollThree;
+                            rollsIndex++;
+                        }
+                     }
+                    }
+
+
+                    else
+                    {
+
+
+
+                        arrayOfArrays[frameIndex][rollCount] = rollOne;
 
                         if (rollOne == 10)
                         {
-                        ScoreCard[scoreCardIndex] = 10;
-                        frameScore = 10;
-                        score += frameScore;
-                        Console.WriteLine("Your score this frame was " + frameScore + " and your total score is " + score);
-                        scoreCardIndex += 1;
-                        Console.WriteLine("Enter the number of pins knocked down on roll 2");
-                        int rollTwo = Convert.ToInt32(Console.ReadLine());
-                        scoreCardIndex += 1;
-                        ScoreCard[scoreCardIndex] = rollTwo;
-                        if (rollTwo == 10)
-                        {
-                            Console.WriteLine("Enter the number of pins knocked down on roll 3");
-                            int rollThree = Convert.ToInt32(Console.ReadLine());
-                            scoreCardIndex += 1;
-                            ScoreCard[scoreCardIndex] = rollThree;
-                            Console.WriteLine("Your game is over and your total score is " + score);
-                        }
+                            frameIndex += 1;
+                            rolls[rollsIndex] = rollOne;
+                            rollsIndex++;
+                            continue;
 
-                        }
-                    else
-                        {
-                        ScoreCard[scoreCardIndex] = rollOne;
-                        frameScore = rollOne;
-                        score += frameScore;
-                        Console.WriteLine("Your score this frame was " + frameScore + " and your total score is " + score);
-                        scoreCardIndex += 1;
-                        Console.WriteLine("Enter the number of pins knocked down on roll 2");
-                        int rollTwo = Convert.ToInt32(Console.ReadLine());
-                        if (rollTwo + rollOne == 10)
-                        {
-                            ScoreCard[scoreCardIndex] = rollTwo;
-                            Console.WriteLine("Enter the number of pins knocked down on roll 3");
-                            int rollThree = Convert.ToInt32(Console.ReadLine());
-                            ScoreCard[scoreCardIndex] = rollThree;
-                            Console.WriteLine("Your game is over and your total score is " + score);
                         }
                         else
                         {
-                            ScoreCard[scoreCardIndex] = rollTwo;
-                            Console.WriteLine("Your game is over and your total score is " + score);
+                            rollCount += 1;
+                            Console.WriteLine("Enter the number of pins knocked down on roll 2 ");
+                            int rollTwo = Convert.ToInt32(Console.ReadLine());
+
+                            arrayOfArrays[frameIndex][rollCount] = rollTwo;
+                            rolls[rollsIndex] = rollTwo;
+                            rollsIndex++;
                         }
-                                        
 
-                                
-                 }
-                    
-
+                    }
+                    frameIndex += 1;
                 }
-                else if (frames <= 9)
-                {
-                    if (rollOne == 10)
-                    {
-                        ScoreCard[scoreCardIndex] = 10;
-                        frameScore = 10;
-                        score += frameScore;
-                        Console.WriteLine("Your score this frame was " + frameScore + " and your total score is " + score);
-                        scoreCardIndex += 2;
+            
 
+
+
+            var frameOfGame = 0;
+
+
+            for (int i = 0; i < arrayOfArrays.Length - 1; i++)
+            {
+
+                // calculating strikes
+                var rollScore = 0;
+                if (i == 10 && arrayOfArrays[frameOfGame][rollScore] == 10)
+                {
+                    arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] + arrayOfArrays[frameOfGame][rollScore + 2];
+                    
+                }
+                else if (i == 10 && arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] == 10)
+                {
+                    arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] + arrayOfArrays[frameOfGame][rollScore + 2];
+                    
+                }
+                else if (arrayOfArrays[frameOfGame][rollScore] == 10)
+                {
+                    if (arrayOfArrays[frameOfGame + 1][rollScore] == 10 && i != 8 && i != 9)
+                    {
+                        arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame + 1][rollScore] + arrayOfArrays[frameOfGame + 2][rollScore];
+                        frameOfGame += 1;
                     }
                     else
                     {
-                        ScoreCard[scoreCardIndex] = rollOne;
-                        frameScore = rollOne;
-                        Console.WriteLine("Your score this frame is " + frameScore);
-                        scoreCardIndex += 1;
-                        Console.WriteLine("Enter the number of pins knocked down on roll 2");
-                        int rollTwo = Convert.ToInt32(Console.ReadLine());
-                            if (rollTwo + rollOne == 10)
-                            {
-                                frameScore = rollOne + rollTwo;
-                            score += frameScore;
-                            ScoreCard[scoreCardIndex] = rollTwo;
-                                Console.WriteLine("Your score this frame was " + frameScore + " and your total score is " + score);
-                            }
-                            else
-                            {
-                            frameScore = rollOne + rollTwo;
-                            score += frameScore;
-                            ScoreCard[scoreCardIndex] = rollTwo;
-                            Console.WriteLine("Your score this frame was " + frameScore + " and your total score is " + score);
-
-                             }
+                        arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame + 1][rollScore] + arrayOfArrays[frameOfGame + 1][rollScore + 1];
+                        frameOfGame += 1;
                     }
-
                 }
-                // Game has passed 10 frames and should be ended
+                //calculating spares
+                else if (arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] == 10)
+                {
+                    arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] + arrayOfArrays[frameOfGame + 1][rollScore];
+                    frameOfGame += 1;
+                    
+                }
+                //calculating regualr scoring
                 else
                 {
-                    Console.WriteLine("Your game is over and your total score is " + score);
+                    frameOfGame += 1;
+                   
                 }
 
             }
 
+
+            int score = 0;
+            for (int i = 0; i < arrayOfArrays.Length; i++)
+            {
+                for (int j = 0; j < arrayOfArrays[i].Length; j++)
+                {
+
+                    score += arrayOfArrays[i][j];
+                }
+            }
+            Console.WriteLine("Your final score is " + score);
+            Console.ReadLine();   // placed so console doesn't close out
+
+            
+
+
+
+            //// What variables will be needed
+            //var score = 0;
+            //var frameScore = 0;
+            //int[] ScoreCard = new int[23] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            //var scoreCardIndex = 0;
+            //var spare = ScoreCard[scoreCardIndex] + (ScoreCard[scoreCardIndex] + 1);
+            //var strike = ScoreCard[scoreCardIndex] + (ScoreCard[scoreCardIndex] + 1) + (ScoreCard[scoreCardIndex] + 1);
+            //List<int> Strikes = new List<int>();
+            //List<int> Spares = new List<int>();
+
+            //for (int frames = 1; frames <= 10; frames++)
+            //{
+            //    Console.WriteLine("You are on frame " + frames);
+            //    Console.WriteLine("Enter the number of pins knocked down on roll 1 ");
+            //    int rollOne = Convert.ToInt32(Console.ReadLine());
+
+            //    if (frames == 10)
+            //    {
+
+            //            if (rollOne == 10)
+            //            {
+            //            frameScore = 10;
+            //            score += strike;
+            //            ScoreCard[scoreCardIndex] = strike;
+            //            Strikes.Add(scoreCardIndex);
+            //            Console.WriteLine("Your score this frame was " + frameScore + " and your total score is " + score);
+            //            scoreCardIndex += 1;
+            //            Console.WriteLine("Enter the number of pins knocked down on roll 2");
+            //            int rollTwo = Convert.ToInt32(Console.ReadLine());
+            //            scoreCardIndex += 1;
+            //            ScoreCard[scoreCardIndex] = rollTwo;
+            //                if (rollTwo == 10)
+            //                {
+            //                    ScoreCard[scoreCardIndex] = spare;
+            //                    Spares.Add(scoreCardIndex);
+            //                    Console.WriteLine("Enter the number of pins knocked down on roll 3");
+            //                    int rollThree = Convert.ToInt32(Console.ReadLine());
+            //                    scoreCardIndex += 1;
+            //                    ScoreCard[scoreCardIndex] = rollThree;
+            //                    Console.WriteLine("Your game is over and your total score is " + score);
+
+
+
+            //                    Console.WriteLine(ScoreCard);
+            //                    Console.ReadLine();
+            //                }
+            //                else
+            //                {
+            //                    Console.WriteLine("Enter the number of pins knocked down on roll 3");
+            //                    int rollThree = Convert.ToInt32(Console.ReadLine());
+            //                    scoreCardIndex += 1;
+            //                    ScoreCard[scoreCardIndex] = rollThree;
+            //                    Console.WriteLine("Your game is over and your total score is " + score);
+
+            //                    Console.WriteLine(ScoreCard);
+            //                    Console.ReadLine();
+            //                }
+
+            //                }
+            //                 else
+            //                {
+            //                ScoreCard[scoreCardIndex] = rollOne;
+            //                frameScore = rollOne;
+            //                score += frameScore;
+            //                Console.WriteLine("Your score this frame was " + frameScore + " and your total score is " + score);
+            //                scoreCardIndex += 1;
+            //                Console.WriteLine("Enter the number of pins knocked down on roll 2");
+            //                int rollTwo = Convert.ToInt32(Console.ReadLine());
+            //                    if (rollTwo + rollOne == 10)
+            //                    {
+            //                         ScoreCard[scoreCardIndex] = strike;
+            //                         Strikes.Add(scoreCardIndex);
+            //                         Console.WriteLine("Enter the number of pins knocked down on roll 3");
+            //                        int rollThree = Convert.ToInt32(Console.ReadLine());
+            //                        ScoreCard[scoreCardIndex] = rollThree;
+            //                        Console.WriteLine("Your game is over and your total score is " + score);
+            //                    }
+            //                    else
+            //                    {
+            //                        ScoreCard[scoreCardIndex] = rollTwo;
+            //                        Console.WriteLine("Your game is over and your total score is " + score);
+            //                        Console.WriteLine(ScoreCard);
+            //                        Console.ReadLine();
+            //                    }
+
+
+
+            //            }
+
+
+            //    }
+            //    else if (frames <= 9)
+            //    {
+            //        if (rollOne == 10)
+            //        {
+            //            ScoreCard[scoreCardIndex] = strike;
+            //            Strikes.Add(scoreCardIndex);
+            //            frameScore = 10;
+            //            score += frameScore;
+            //            Console.WriteLine("Your score this frame was " + frameScore + " and your total score is " + score);
+            //            scoreCardIndex += 2;
+
+            //        }
+            //        else
+            //        {
+            //            ScoreCard[scoreCardIndex] = rollOne;
+            //            frameScore = rollOne;
+            //            Console.WriteLine("Your score this frame is " + frameScore);
+            //            scoreCardIndex += 1;
+            //            Console.WriteLine("Enter the number of pins knocked down on roll 2");
+            //            int rollTwo = Convert.ToInt32(Console.ReadLine());
+            //                if (rollTwo + rollOne == 10)
+            //                {
+            //                ScoreCard[scoreCardIndex] = spare;
+            //                Spares.Add(scoreCardIndex);
+            //                frameScore = rollOne + rollTwo;
+            //                score += frameScore;
+            //                Console.WriteLine("Your score this frame was " + frameScore + " and your total score is " + score);
+            //                }
+            //                else
+            //                {
+            //                frameScore = rollOne + rollTwo;
+            //                score += frameScore;
+            //                ScoreCard[scoreCardIndex] = rollTwo;
+            //                Console.WriteLine("Your score this frame was " + frameScore + " and your total score is " + score);
+
+            //                 }
+            //        }
+
+            //    }
+            //    // Game has passed 10 frames and should be ended
+            //    else
+            //    {
+            //        Console.WriteLine("Your game is over and your total score is " + score);
+            //    }
+
+            //}
+
         }
 
-       
+
     }
 }
