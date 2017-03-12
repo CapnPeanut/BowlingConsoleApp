@@ -38,8 +38,6 @@ namespace Bowling_Problem
                 {
 
 
-
-                    var rollsIndex = 0;
                     Console.WriteLine("Frame " + frame);
                     Console.WriteLine("Enter the number of pins knocked down on roll 1 ");
                     int rollOne = Convert.ToInt32(Console.ReadLine());
@@ -179,56 +177,10 @@ namespace Bowling_Problem
 
 
 
-            /////////////////////////////////  My old work
 
 
 
-            //var frameOfGame = 0;
 
-
-            //for (int i = 0; i < arrayOfArrays.Length - 1; i++)
-            //{
-
-            //    // calculating strikes
-            //    var rollScore = 0;
-            //    if (i == 10 && arrayOfArrays[frameOfGame][rollScore] == 10)
-            //    {
-            //        arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] + arrayOfArrays[frameOfGame][rollScore + 2];
-
-            //    }
-            //    else if (i == 10 && arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] == 10)
-            //    {
-            //        arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] + arrayOfArrays[frameOfGame][rollScore + 2];
-
-            //    }
-            //    else if (arrayOfArrays[frameOfGame][rollScore] == 10)
-            //    {
-            //        if (arrayOfArrays[frameOfGame + 1][rollScore] == 10 && i != 8 && i != 9)
-            //        {
-            //            arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame + 1][rollScore] + arrayOfArrays[frameOfGame + 2][rollScore];
-            //            frameOfGame += 1;
-            //        }
-            //        else
-            //        {
-            //            arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame + 1][rollScore] + arrayOfArrays[frameOfGame + 1][rollScore + 1];
-            //            frameOfGame += 1;
-            //        }
-            //    }
-            //    //calculating spares
-            //    else if (arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] == 10)
-            //    {
-            //        arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] + arrayOfArrays[frameOfGame + 1][rollScore];
-            //        frameOfGame += 1;
-
-            //    }
-            //    //calculating regualr scoring
-            //    else
-            //    {
-            //        frameOfGame += 1;
-
-            //    }
-
-            //}
 
 
             int score = 0;
@@ -253,7 +205,71 @@ namespace Bowling_Problem
 
 
 
-                    //////////////////////////////////////  My beginning working through the logic
+
+
+
+
+
+
+
+/////////////////////////////////  My old work  ///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//var frameOfGame = 0;
+
+
+//for (int i = 0; i < arrayOfArrays.Length - 1; i++)
+//{
+
+//    // calculating strikes
+//    var rollScore = 0;
+//    if (i == 10 && arrayOfArrays[frameOfGame][rollScore] == 10)
+//    {
+//        arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] + arrayOfArrays[frameOfGame][rollScore + 2];
+
+//    }
+//    else if (i == 10 && arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] == 10)
+//    {
+//        arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] + arrayOfArrays[frameOfGame][rollScore + 2];
+
+//    }
+//    else if (arrayOfArrays[frameOfGame][rollScore] == 10)
+//    {
+//        if (arrayOfArrays[frameOfGame + 1][rollScore] == 10 && i != 8 && i != 9)
+//        {
+//            arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame + 1][rollScore] + arrayOfArrays[frameOfGame + 2][rollScore];
+//            frameOfGame += 1;
+//        }
+//        else
+//        {
+//            arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame + 1][rollScore] + arrayOfArrays[frameOfGame + 1][rollScore + 1];
+//            frameOfGame += 1;
+//        }
+//    }
+//    //calculating spares
+//    else if (arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] == 10)
+//    {
+//        arrayOfArrays[frameOfGame][rollScore] = arrayOfArrays[frameOfGame][rollScore] + arrayOfArrays[frameOfGame][rollScore + 1] + arrayOfArrays[frameOfGame + 1][rollScore];
+//        frameOfGame += 1;
+
+//    }
+//    //calculating regualr scoring
+//    else
+//    {
+//        frameOfGame += 1;
+
+//    }
+
+//}
+
+
+
+
+
+
+
+//////////////////////////////////////  My beginning working through the logic
 
 
 
